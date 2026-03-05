@@ -1,19 +1,321 @@
-import { Button } from "@/components/ui/button";
+"use client"
+
+import { useEffect, useRef } from "react"
+import Link from "next/link"
+
+const floatingCards = [
+  {
+    quote: "Be strong and courageous. Do not be afraid.",
+    reference: "Joshua 1:9",
+    type: "scripture",
+    position: { top: "18%", left: "4%" },
+    delay: "0s",
+  },
+  {
+    quote: "Discipline is the bridge between goals and accomplishment.",
+    reference: "Jim Rohn",
+    type: "quote",
+    position: { top: "14%", right: "4%" },
+    delay: "0.6s",
+  },
+  {
+    quote: "As iron sharpens iron, so one man sharpens another.",
+    reference: "Proverbs 27:17",
+    type: "scripture",
+    position: { top: "55%", left: "2%" },
+    delay: "1.2s",
+  },
+  {
+    quote: "The most important thing a father can do for his children is to love their mother.",
+    reference: "Theodore Hesburgh",
+    type: "quote",
+    position: { top: "62%", right: "3%" },
+    delay: "0.3s",
+  },
+  {
+    quote: "I can do all things through Christ who strengthens me.",
+    reference: "Philippians 4:13",
+    type: "scripture",
+    position: { top: "80%", left: "6%" },
+    delay: "0.9s",
+  },
+  {
+    quote: "Hard times create strong men.",
+    reference: "G. Michael Hopf",
+    type: "quote",
+    position: { top: "78%", right: "5%" },
+    delay: "1.5s",
+  },
+]
+
+const features = [
+  { icon: "📖", label: "Bible Reading" },
+  { icon: "🙏", label: "Prayer Log" },
+  { icon: "🎯", label: "Business Goals" },
+  { icon: "🔥", label: "Streak Counter" },
+  { icon: "📝", label: "Weekly Reflection" },
+  { icon: "✝️", label: "Scripture of the Day" },
+]
 
 export default function LandingPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center text-center px-4">
-      <h1 className="text-6xl font-bold text-white mb-4">
-        Your App Name Here
-      </h1>
-      <p className="text-xl text-white/70 max-w-md mb-8">
-        A short description of what your app does. Keep it simple and compelling.
-      </p>
-      <div className="flex items-start gap-2">
-        <Button variant="outline">
-          Get Started
-        </Button>
-      </div>
-    </main>
-  );
+    <div className="relative min-h-screen overflow-hidden bg-[#0a0a0f] text-white">
+      {/* Google Fonts */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap');
+
+        * { box-sizing: border-box; }
+
+        .font-display { font-family: 'Cormorant Garamond', serif; }
+        .font-body { font-family: 'DM Sans', sans-serif; }
+
+        .grain {
+          position: fixed;
+          inset: 0;
+          pointer-events: none;
+          z-index: 1;
+          opacity: 0.035;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+          background-size: 200px;
+        }
+
+        .glow-orb {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(120px);
+          pointer-events: none;
+        }
+
+        @keyframes floatA {
+          0%, 100% { transform: translateY(0px) rotate(-1deg); }
+          50% { transform: translateY(-14px) rotate(1deg); }
+        }
+        @keyframes floatB {
+          0%, 100% { transform: translateY(0px) rotate(1deg); }
+          50% { transform: translateY(-10px) rotate(-1deg); }
+        }
+        @keyframes floatC {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-18px) rotate(2deg); }
+        }
+
+        .float-a { animation: floatA 7s ease-in-out infinite; }
+        .float-b { animation: floatB 9s ease-in-out infinite; }
+        .float-c { animation: floatC 6s ease-in-out infinite; }
+
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in-up {
+          opacity: 0;
+          animation: fadeInUp 0.9s ease forwards;
+        }
+
+        .card-scripture {
+          background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(212,175,55,0.04));
+          border: 1px solid rgba(212,175,55,0.25);
+          backdrop-filter: blur(12px);
+        }
+
+        .card-quote {
+          background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+          border: 1px solid rgba(255,255,255,0.1);
+          backdrop-filter: blur(12px);
+        }
+
+        .gold { color: #d4af37; }
+        .gold-border { border-color: rgba(212,175,55,0.4); }
+
+        .btn-primary {
+          background: linear-gradient(135deg, #d4af37, #b8962e);
+          color: #0a0a0f;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          transition: all 0.3s ease;
+          box-shadow: 0 0 30px rgba(212,175,55,0.25);
+        }
+        .btn-primary:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 0 50px rgba(212,175,55,0.4);
+        }
+
+        .btn-secondary {
+          background: transparent;
+          border: 1px solid rgba(255,255,255,0.2);
+          color: rgba(255,255,255,0.8);
+          transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+          border-color: rgba(212,175,55,0.5);
+          color: #d4af37;
+          transform: translateY(-2px);
+        }
+
+        .nav-link {
+          color: rgba(255,255,255,0.55);
+          transition: color 0.2s;
+          font-size: 0.875rem;
+          letter-spacing: 0.02em;
+        }
+        .nav-link:hover { color: rgba(255,255,255,0.9); }
+
+        .feature-pill {
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.08);
+          transition: all 0.3s ease;
+        }
+        .feature-pill:hover {
+          background: rgba(212,175,55,0.08);
+          border-color: rgba(212,175,55,0.3);
+        }
+
+        .headline-muted { color: rgba(255,255,255,0.25); }
+      `}</style>
+
+      {/* Grain overlay */}
+      <div className="grain" />
+
+      {/* Background orbs */}
+      <div className="glow-orb w-[600px] h-[600px] bg-amber-600/10 top-[-100px] left-[20%]" />
+      <div className="glow-orb w-[400px] h-[400px] bg-amber-500/8 bottom-[10%] right-[10%]" />
+      <div className="glow-orb w-[300px] h-[300px] bg-yellow-700/10 top-[40%] left-[-5%]" />
+
+      {/* Navbar */}
+      <nav className="font-body relative z-50 flex items-center justify-between px-8 py-6 max-w-6xl mx-auto">
+        <div className="flex items-center gap-2">
+          <div className="w-7 h-7 rounded-md flex items-center justify-center text-sm" style={{ background: 'linear-gradient(135deg, #d4af37, #b8962e)' }}>
+            ✝
+          </div>
+          <span className="font-medium text-white/90 tracking-wide text-sm">FaithGrowth</span>
+        </div>
+
+        <div className="hidden md:flex items-center gap-8">
+          <a href="#features" className="nav-link">Features</a>
+          <a href="#about" className="nav-link">About</a>
+          <a href="#scripture" className="nav-link">Scripture</a>
+        </div>
+
+        <Link
+          href="/login"
+          className="btn-secondary font-body text-sm px-5 py-2 rounded-full"
+        >
+          Log In
+        </Link>
+      </nav>
+
+      {/* Floating Quote Cards */}
+      {floatingCards.map((card, i) => (
+        <div
+          key={i}
+          className={`absolute z-20 hidden lg:block ${i % 3 === 0 ? 'float-a' : i % 3 === 1 ? 'float-b' : 'float-c'} ${card.type === 'scripture' ? 'card-scripture' : 'card-quote'} rounded-2xl p-4 max-w-[220px] fade-in-up`}
+          style={{
+            ...card.position,
+            animationDelay: card.delay,
+            animationFillMode: 'forwards',
+          }}
+        >
+          {card.type === 'scripture' && (
+            <span className="text-[10px] gold font-body uppercase tracking-widest mb-2 block">Scripture</span>
+          )}
+          <p className="font-display text-sm text-white/80 leading-relaxed italic">"{card.quote}"</p>
+          <p className="font-body text-[11px] mt-2" style={{ color: card.type === 'scripture' ? '#d4af37' : 'rgba(255,255,255,0.4)' }}>
+            — {card.reference}
+          </p>
+        </div>
+      ))}
+
+      {/* Hero Section */}
+      <section className="relative z-30 flex flex-col items-center text-center px-6 pt-16 pb-24 max-w-4xl mx-auto">
+        {/* Eyebrow */}
+        <div
+          className="font-body fade-in-up mb-8 inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs tracking-widest uppercase"
+          style={{
+            animationDelay: '0.1s',
+            animationFillMode: 'forwards',
+            background: 'rgba(212,175,55,0.1)',
+            border: '1px solid rgba(212,175,55,0.25)',
+            color: '#d4af37',
+          }}
+        >
+          <span>✝</span> Faith · Discipline · Purpose
+        </div>
+
+        {/* Headline */}
+        <h1
+          className="font-display fade-in-up"
+          style={{
+            fontSize: 'clamp(3rem, 8vw, 6.5rem)',
+            lineHeight: 1.05,
+            fontWeight: 700,
+            letterSpacing: '-0.01em',
+            animationDelay: '0.2s',
+            animationFillMode: 'forwards',
+          }}
+        >
+          Become the Man<br />
+          <span className="headline-muted">God Called</span><br />
+          You to Be
+        </h1>
+
+        {/* Subtext */}
+        <p
+          className="font-body fade-in-up mt-8 max-w-lg text-base leading-relaxed"
+          style={{
+            color: 'rgba(255,255,255,0.45)',
+            animationDelay: '0.35s',
+            animationFillMode: 'forwards',
+          }}
+        >
+          Track your Bible reading, prayers, business goals, and daily discipline — all in one place. Built for men who take their faith and growth seriously.
+        </p>
+
+        {/* CTAs */}
+        <div
+          className="font-body fade-in-up flex flex-col sm:flex-row items-center gap-4 mt-10"
+          style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}
+        >
+          <Link
+            href="/login"
+            className="btn-primary px-8 py-3.5 rounded-full text-sm"
+          >
+            Get Started — It's Free
+          </Link>
+          <a href="#features" className="btn-secondary px-8 py-3.5 rounded-full text-sm">
+            See Features
+          </a>
+        </div>
+
+        {/* Feature pills */}
+        <div
+          className="font-body fade-in-up flex flex-wrap justify-center gap-2 mt-14"
+          style={{ animationDelay: '0.65s', animationFillMode: 'forwards' }}
+          id="features"
+        >
+          {features.map((f, i) => (
+            <div key={i} className="feature-pill flex items-center gap-2 px-4 py-2 rounded-full text-sm text-white/60">
+              <span>{f.icon}</span>
+              <span>{f.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Scripture strip */}
+      <section
+        id="scripture"
+        className="relative z-30 border-t mx-8 pt-12 pb-16 text-center"
+        style={{ borderColor: 'rgba(255,255,255,0.06)' }}
+      >
+        <p
+          className="font-display text-2xl md:text-3xl italic max-w-2xl mx-auto"
+          style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}
+        >
+          "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you."
+        </p>
+        <p className="font-body text-sm mt-4 gold tracking-widest uppercase">Jeremiah 29:11</p>
+      </section>
+    </div>
+  )
 }

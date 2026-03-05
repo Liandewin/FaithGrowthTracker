@@ -1,5 +1,7 @@
 "use client"
 
+import { createSupabaseBrowserClient } from '@/lib/supabase-browser'
+
 import {
   BadgeCheck,
   Bell,
@@ -40,6 +42,13 @@ export function NavUser({
   }
 }) {
   const { isMobile } = useSidebar()
+
+  const supabase = createSupabaseBrowserClient()
+
+  async function handleLogout() {
+    await supabase.auth.signOut()
+    window.location.href = '/login'
+  }
 
   return (
     <SidebarMenu>
@@ -102,7 +111,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>
               <LogOut />
               Log out
             </DropdownMenuItem>

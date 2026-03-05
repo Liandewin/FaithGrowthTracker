@@ -1,38 +1,18 @@
-'use client'
-
-import { useState } from 'react'
-import { createSupabaseBrowserClient } from '@/lib/supabase-browser'
-
-const supabase = createSupabaseBrowserClient()
+import { GalleryVerticalEnd } from "lucide-react"
+import { LoginForm } from "@/components/login-form"
 
 export default function LoginPage() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
-
-    async function handleLogin() {
-        const { error } = await supabase.auth.signInWithPassword({ email, password })
-        if (error) {
-            setError(error.message)
-        } else {
-            window.location.href = '/'
-        }
-    }
-
-    async function handleSignUp() {
-        const { error } = await supabase.auth.signUp({ email, password })
-        if (error) setError(error.message)
-        else setError('Check your email to confirm your account!')
-    }
-
     return (
-        <div>
-            <h1>Welcome</h1>
-            <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-            <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-            {error && <p>{error}</p>}
-            <button onClick={handleLogin}>Log In</button>
-            <button onClick={handleSignUp}>Sign Up</button>
+        <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
+            <div className="flex w-full max-w-sm flex-col gap-6">
+                <a href="#" className="flex items-center gap-2 self-center font-medium">
+                    <div className="flex size-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
+                        <GalleryVerticalEnd className="size-4" />
+                    </div>
+                    Growth Tracker
+                </a>
+                <LoginForm />
+            </div>
         </div>
     )
 }
