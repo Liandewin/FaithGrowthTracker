@@ -3,7 +3,7 @@
 import * as React from "react"
 import {
   BookOpen,
-  Bot,
+  BookCheck,
   Command,
   Frame,
   LifeBuoy,
@@ -55,9 +55,9 @@ const data = {
       ],
     },
     {
-      title: "Models",
-      url: "#",
-      icon: Bot,
+      title: "Bible Tracker",
+      url: "/dashboard/bible-tracker",
+      icon: BookCheck,
       items: [
         {
           title: "Genesis",
@@ -137,7 +137,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar variant="inset" {...props}>
+    <Sidebar variant="sidebar" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
