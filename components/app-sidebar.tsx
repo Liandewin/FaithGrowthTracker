@@ -5,13 +5,13 @@ import {
   BookOpen,
   BookCheck,
   Command,
-  Frame,
+  Speech,
   LifeBuoy,
-  Map,
-  PieChart,
+  NotebookPen,
+  Dumbbell,
   Send,
-  Settings2,
-  SquareTerminal,
+  CheckCheck,
+  House,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -37,87 +37,33 @@ const data = {
     {
       title: "Home",
       url: "#",
-      icon: SquareTerminal,
+      icon: House,
       isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
     },
     {
       title: "Bible Tracker",
       url: "/dashboard/bible-tracker",
       icon: BookCheck,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
     },
     {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
+      title: "Prayer Log",
+      url: "/dashboard/prayer-log",
+      icon: Speech,
     },
     {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
+      title: "Journal",
+      url: "/dashboard/journal",
+      icon: NotebookPen,
+    },
+    {
+      title: "Goals",
+      url: "/dashboard/goals",
+      icon: CheckCheck,
+    },
+    {
+      title: "Fitness",
+      url: "/dashboard/fitness",
+      icon: Dumbbell,
     },
   ],
   navSecondary: [
