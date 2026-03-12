@@ -205,6 +205,16 @@ export default function JournalClient() {
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', flexDirection: 'column', gap: 12 }}>
                             <p style={{ fontSize: 40 }}>📓</p>
                             <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 15 }}>Select an entry or create a new one</p>
+                            <button
+                                onClick={() => { setIsWriting(true); setSelected(null) }}
+                                style={{
+                                    background: 'rgba(212,175,55,0.15)', border: '1px solid rgba(212,175,55,0.3)',
+                                    color: '#d4af37', padding: '10px 20px', borderRadius: 10,
+                                    fontSize: 14, fontWeight: 600, cursor: 'pointer', marginTop: 4,
+                                }}
+                            >
+                                + New Entry
+                            </button>
                         </div>
                     )}
                 </div>
