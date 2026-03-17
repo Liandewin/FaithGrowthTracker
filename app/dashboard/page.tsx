@@ -1,12 +1,22 @@
-export default function Page() {
-    return (
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-            <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-                <div className="bg-muted/50 aspect-video rounded-xl" />
-                <div className="bg-muted/50 aspect-video rounded-xl" />
-                <div className="bg-muted/50 aspect-video rounded-xl" />
-            </div>
-            <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
-        </div>
-    )
+import { createSupabaseServerClient } from '@/lib/supabase-server'
+import HomeClient from '@/components/home-page/home-client'
+
+export default async function DashboardPage() {
+    const supabase = await createSupabaseServerClient()
+
+    const { data: { user } } = await supabase.auth.getUser()
+
+    let firstName = 'Friend'
+
+    if (user) {
+        const { data: profile } = await supabase
+            .from('profiles')
+            .select('first_name')
+            .eq('id', user.id)
+            .single()
+
+        if (profile?.first_name) firstName = profile.first_name
+    }
+
+    return <HomeClient firstName={firstName} />
 }

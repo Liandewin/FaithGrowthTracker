@@ -1,0 +1,54 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+
+interface Verse {
+    id: string
+    reference: string
+    text: string
+}
+
+export default function VerseOfTheDay() {
+    const [verse, setVerse] = useState<Verse | null>(null)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        async function load() {
+            const res = await fetch('/api/verse')
+            if (res.ok) {
+                const data = await res.json()
+                setVerse(data)
+            }
+            setLoading(false)
+        }
+        load()
+    }, [])
+
+    return (
+        <div style={{
+            background: 'rgba(212,175,55,0.06)',
+            border: '1px solid rgba(212,175,55,0.2)',
+            borderRadius: 16,
+            padding: 28,
+            marginBottom: 32,
+        }}>
+            <div style={{ fontSize: 12, color: '#d4af37', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 16 }}>
+                ✨ Verse of the Day
+            </div>
+            {loading ? (
+                <div style={{ height: 60, background: 'rgba(255,255,255,0.04)', borderRadius: 8, animation: 'pulse 2s infinite' }} />
+            ) : verse ? (
+                <>
+                    <p style={{ fontSize: 18, lineHeight: 1.8, color: 'rgba(255,255,255,0.85)', margin: '0 0 16px', fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic' }}>
+                        "{verse.text}"
+                    </p>
+                    <p style={{ fontSize: 14, color: '#d4af37', margin: 0, fontWeight: 600 }}>
+                        — {verse.reference}
+                    </p>
+                </>
+            ) : (
+                <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 14 }}>No verse available today.</p>
+            )}
+        </div>
+    )
+}

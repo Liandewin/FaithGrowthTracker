@@ -18,7 +18,7 @@ export default function BibleTrackerPage() {
     useEffect(() => {
         async function load() {
             const { data, error } = await supabase
-                .from('bible_readings')
+                .from('bible_reading')
                 .select('*')
                 .order('date', { ascending: false })
 

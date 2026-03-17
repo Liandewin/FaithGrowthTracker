@@ -24,7 +24,7 @@ export default function RecentReadings({ readings, loading, onDelete }: Props) {
     const supabase = createSupabaseBrowserClient()
 
     async function handleDelete(id: string) {
-        await supabase.from('bible_readings').delete().eq('id', id)
+        await supabase.from('bible_reading').delete().eq('id', id)
         onDelete(id)
     }
 

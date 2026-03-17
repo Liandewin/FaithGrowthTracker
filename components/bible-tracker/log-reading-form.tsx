@@ -36,9 +36,13 @@ export default function LogReadingForm({ onSave, onCancel }: Props) {
         if (!form.book || !form.chapter) return
         setSaving(true)
 
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) return
+
         const { data, error } = await supabase
-            .from('bible_readings')
+            .from('bible_reading')
             .insert({
+                user_id: user.id,
                 book: form.book,
                 chapter: parseInt(form.chapter),
                 date: form.date,
