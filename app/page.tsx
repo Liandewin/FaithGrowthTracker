@@ -1,6 +1,5 @@
 "use client"
 
-import { useEffect, useRef } from "react"
 import Link from "next/link"
 
 const floatingCards = [
@@ -49,18 +48,54 @@ const floatingCards = [
 ]
 
 const features = [
-  { icon: "📖", label: "Bible Reading" },
-  { icon: "🙏", label: "Prayer Log" },
-  { icon: "🎯", label: "Business Goals" },
-  { icon: "🔥", label: "Streak Counter" },
-  { icon: "📝", label: "Weekly Reflection" },
-  { icon: "✝️", label: "Scripture of the Day" },
+  {
+    icon: "📖",
+    title: "Bible Tracker",
+    description: "Log every chapter you read, build a daily streak, and watch your consistency compound over time.",
+  },
+  {
+    icon: "🙏",
+    title: "Prayer Log",
+    description: "Record your prayers and mark them answered. A living record of God's faithfulness in your life.",
+  },
+  {
+    icon: "🎯",
+    title: "Goals Board",
+    description: "Set goals across every area of life — spiritual, financial, health, relationships — and move them through a Kanban board.",
+  },
+  {
+    icon: "📓",
+    title: "Journal",
+    description: "A private space to reflect, process, and write. No distractions, just you and the page.",
+  },
+  {
+    icon: "💪",
+    title: "Fitness Log",
+    description: "Track your workouts and stay physically sharp. A strong body supports a strong mind and spirit.",
+  },
+]
+
+const pillars = [
+  {
+    icon: "⚔️",
+    title: "Accountability",
+    description: "Data doesn't lie. Seeing your actual consistency — Bible readings, workouts, goals — cuts through self-deception and keeps you honest with yourself.",
+  },
+  {
+    icon: "🔥",
+    title: "Consistency",
+    description: "Small daily actions compound into transformation. This app is built around streaks, weekly reviews, and monthly recaps to keep momentum alive.",
+  },
+  {
+    icon: "✝️",
+    title: "Purpose",
+    description: "Growth without direction is just noise. Every feature here is built around becoming the man God designed you to be — in faith, character, and action.",
+  },
 ]
 
 export default function LandingPage() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#0a0a0f] text-white">
-      {/* Google Fonts */}
+    <div className="relative min-h-screen bg-[#0a0a0f] text-white">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap');
 
@@ -126,7 +161,6 @@ export default function LandingPage() {
         }
 
         .gold { color: #d4af37; }
-        .gold-border { border-color: rgba(212,175,55,0.4); }
 
         .btn-primary {
           background: linear-gradient(135deg, #d4af37, #b8962e);
@@ -161,14 +195,30 @@ export default function LandingPage() {
         }
         .nav-link:hover { color: rgba(255,255,255,0.9); }
 
-        .feature-pill {
-          background: rgba(255,255,255,0.04);
+        .feature-card {
+          background: rgba(255,255,255,0.03);
           border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 20px;
+          padding: 32px;
           transition: all 0.3s ease;
         }
-        .feature-pill:hover {
-          background: rgba(212,175,55,0.08);
-          border-color: rgba(212,175,55,0.3);
+        .feature-card:hover {
+          background: rgba(212,175,55,0.06);
+          border-color: rgba(212,175,55,0.25);
+          transform: translateY(-4px);
+        }
+
+        .pillar-card {
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(255,255,255,0.06);
+          border-radius: 20px;
+          padding: 36px 32px;
+        }
+
+        .section-divider {
+          border: none;
+          border-top: 1px solid rgba(255,255,255,0.06);
+          margin: 0 32px;
         }
 
         .headline-muted { color: rgba(255,255,255,0.25); }
@@ -197,10 +247,7 @@ export default function LandingPage() {
           <a href="#scripture" className="nav-link">Scripture</a>
         </div>
 
-        <Link
-          href="/login"
-          className="btn-secondary font-body text-sm px-5 py-2 rounded-full"
-        >
+        <Link href="/login" className="btn-secondary font-body text-sm px-5 py-2 rounded-full">
           Log In
         </Link>
       </nav>
@@ -227,8 +274,7 @@ export default function LandingPage() {
       ))}
 
       {/* Hero Section */}
-      <section className="relative z-30 flex flex-col items-center text-center px-6 pt-16 pb-24 max-w-4xl mx-auto">
-        {/* Eyebrow */}
+      <section className="relative z-30 flex flex-col items-center text-center px-6 pt-16 pb-32 max-w-4xl mx-auto">
         <div
           className="font-body fade-in-up mb-8 inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs tracking-widest uppercase"
           style={{
@@ -242,7 +288,6 @@ export default function LandingPage() {
           <span>✝</span> Faith · Discipline · Purpose
         </div>
 
-        {/* Headline */}
         <h1
           className="font-display fade-in-up"
           style={{
@@ -259,7 +304,6 @@ export default function LandingPage() {
           You to Be
         </h1>
 
-        {/* Subtext */}
         <p
           className="font-body fade-in-up mt-8 max-w-lg text-base leading-relaxed"
           style={{
@@ -268,45 +312,95 @@ export default function LandingPage() {
             animationFillMode: 'forwards',
           }}
         >
-          Track your Bible reading, prayers, business goals, and daily discipline — all in one place. Built for men who take their faith and growth seriously.
+          Track your Bible reading, prayers, goals, and fitness — all in one place. Built for men who take their faith and growth seriously.
         </p>
 
-        {/* CTAs */}
         <div
           className="font-body fade-in-up flex flex-col sm:flex-row items-center gap-4 mt-10"
           style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}
         >
-          <Link
-            href="/login"
-            className="btn-primary px-8 py-3.5 rounded-full text-sm"
-          >
+          <Link href="/login" className="btn-primary px-8 py-3.5 rounded-full text-sm">
             Get Started — It's Free
           </Link>
           <a href="#features" className="btn-secondary px-8 py-3.5 rounded-full text-sm">
             See Features
           </a>
         </div>
+      </section>
 
-        {/* Feature pills */}
-        <div
-          className="font-body fade-in-up flex flex-wrap justify-center gap-2 mt-14"
-          style={{ animationDelay: '0.65s', animationFillMode: 'forwards' }}
-          id="features"
-        >
+      {/* Features Section */}
+      <section id="features" className="relative z-30 px-8 pb-32 max-w-6xl mx-auto">
+        <hr className="section-divider mb-20" />
+
+        <div className="text-center mb-16">
+          <p className="font-body text-xs uppercase tracking-widest gold mb-4">Everything you need</p>
+          <h2 className="font-display text-5xl md:text-6xl font-bold">
+            Built around your growth
+          </h2>
+          <p className="font-body mt-4 max-w-md mx-auto text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.4)' }}>
+            Five focused tools, one dashboard. No fluff, no distraction — just the disciplines that matter.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {features.map((f, i) => (
-            <div key={i} className="feature-pill flex items-center gap-2 px-4 py-2 rounded-full text-sm text-white/60">
-              <span>{f.icon}</span>
-              <span>{f.label}</span>
+            <div key={i} className="feature-card">
+              <div className="text-3xl mb-5">{f.icon}</div>
+              <h3 className="font-display text-2xl font-semibold mb-3">{f.title}</h3>
+              <p className="font-body text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                {f.description}
+              </p>
+            </div>
+          ))}
+
+          {/* CTA card */}
+          <div className="feature-card flex flex-col items-start justify-between" style={{ background: 'rgba(212,175,55,0.06)', borderColor: 'rgba(212,175,55,0.2)' }}>
+            <div>
+              <div className="text-3xl mb-5">⚔️</div>
+              <h3 className="font-display text-2xl font-semibold mb-3">Monthly Review</h3>
+              <p className="font-body text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                At the end of every month, get a full breakdown of your progress and earn your tier — Warrior, Soldier, Recruit, or Apprentice.
+              </p>
+            </div>
+            <Link href="/login" className="btn-primary font-body text-sm px-6 py-2.5 rounded-full mt-8 inline-block">
+              Start tracking →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="relative z-30 px-8 pb-32 max-w-6xl mx-auto">
+        <hr className="section-divider mb-20" />
+
+        <div className="text-center mb-16">
+          <p className="font-body text-xs uppercase tracking-widest gold mb-4">Why it works</p>
+          <h2 className="font-display text-5xl md:text-6xl font-bold">
+            Structure creates freedom
+          </h2>
+          <p className="font-body mt-4 max-w-md mx-auto text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.4)' }}>
+            The men who grow the most aren't the most talented — they're the most consistent. This app is built on that truth.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {pillars.map((p, i) => (
+            <div key={i} className="pillar-card">
+              <div className="text-3xl mb-6">{p.icon}</div>
+              <h3 className="font-display text-2xl font-semibold mb-4">{p.title}</h3>
+              <p className="font-body text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                {p.description}
+              </p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Scripture strip */}
+      {/* Scripture Strip */}
       <section
         id="scripture"
-        className="relative z-30 border-t mx-8 pt-12 pb-16 text-center"
-        style={{ borderColor: 'rgba(255,255,255,0.06)' }}
+        className="relative z-30 px-8 pt-16 pb-20 text-center"
+        style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
       >
         <p
           className="font-display text-2xl md:text-3xl italic max-w-2xl mx-auto"
@@ -315,6 +409,15 @@ export default function LandingPage() {
           "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you."
         </p>
         <p className="font-body text-sm mt-4 gold tracking-widest uppercase">Jeremiah 29:11</p>
+
+        <div className="mt-12 flex flex-col items-center gap-4">
+          <Link href="/login" className="btn-primary font-body text-sm px-8 py-3.5 rounded-full">
+            Begin your journey →
+          </Link>
+          <p className="font-body text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>
+            Free to use. No credit card required.
+          </p>
+        </div>
       </section>
     </div>
   )
