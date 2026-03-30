@@ -1,7 +1,7 @@
 import { Resend } from 'resend'
-import { createSupabaseServerClient } from '@/lib/supabase-server'
 import { NextResponse, NextRequest } from 'next/server'
 import DailyCheckinEmail from '@/app/email/daily-checkin'
+import { createSupabaseServiceClient } from '@/lib/supabase-server'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const supabase = await createSupabaseServerClient()
+    const supabase = createSupabaseServiceClient()
 
     const { data: profiles, error } = await supabase
         .from('profiles')
