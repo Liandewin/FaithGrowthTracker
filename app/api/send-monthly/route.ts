@@ -1,5 +1,5 @@
 import { Resend } from 'resend'
-import { createSupabaseServerClient } from '@/lib/supabase-server'
+import { createSupabaseServerClient, createSupabaseServiceClient } from '@/lib/supabase-server'
 import { NextRequest, NextResponse } from 'next/server'
 import MonthlyReviewEmail from '@/app/email/monthly-review'
 
@@ -78,7 +78,7 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const supabase = await createSupabaseServerClient()
+    const supabase = await createSupabaseServiceClient()
     const { data: profiles } = await supabase.from('profiles').select('id, first_name, email')
     if (!profiles) return NextResponse.json({ error: 'No profiles' }, { status: 500 })
 

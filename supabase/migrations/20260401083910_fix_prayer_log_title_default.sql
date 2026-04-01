@@ -1,0 +1,1 @@
+ALTER TABLE prayer_log ALTER COLUMN title DROP DEFAULT;
