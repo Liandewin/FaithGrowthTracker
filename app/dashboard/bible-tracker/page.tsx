@@ -13,10 +13,10 @@ export default function BibleTrackerPage() {
     return (
         <div style={{
             minHeight: '100vh',
-            background: '#0a0a0f',
+            background: 'var(--app-bg)',
             padding: '32px',
             fontFamily: "'DM Sans', sans-serif",
-            color: 'white',
+            color: 'var(--app-text)',
         }}>
             <Suspense fallback={<WelcomeHeaderSkeleton />}>
                 <WelcomeHeader />

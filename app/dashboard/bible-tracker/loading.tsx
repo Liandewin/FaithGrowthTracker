@@ -2,27 +2,10 @@ export default function BibleTrackerLoading() {
     return (
         <div style={{
             minHeight: '100vh',
-            background: '#0a0a0f',
+            background: 'var(--app-bg)',
             padding: '32px',
             fontFamily: "'DM Sans', sans-serif",
         }}>
-            <style>{`
-        @keyframes shimmer {
-          0% { background-position: -1000px 0; }
-          100% { background-position: 1000px 0; }
-        }
-        .skeleton {
-          background: linear-gradient(
-            90deg,
-            rgba(255,255,255,0.04) 25%,
-            rgba(255,255,255,0.08) 50%,
-            rgba(255,255,255,0.04) 75%
-          );
-          background-size: 1000px 100%;
-          animation: shimmer 2s infinite;
-          border-radius: 8px;
-        }
-      `}</style>
 
             {/* Header skeleton */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 32 }}>
@@ -37,8 +20,8 @@ export default function BibleTrackerLoading() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 24 }}>
                 {[...Array(4)].map((_, i) => (
                     <div key={i} style={{
-                        background: 'rgba(255,255,255,0.04)',
-                        border: '1px solid rgba(255,255,255,0.08)',
+                        background: 'var(--card-bg)',
+                        border: '1px solid var(--border-default)',
                         borderRadius: 16,
                         padding: 20,
                     }}>
@@ -57,8 +40,8 @@ export default function BibleTrackerLoading() {
 
                 {/* Chart skeleton */}
                 <div style={{
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.08)',
+                    background: 'var(--card-bg)',
+                    border: '1px solid var(--border-default)',
                     borderRadius: 16,
                     padding: 24,
                 }}>
@@ -82,8 +65,8 @@ export default function BibleTrackerLoading() {
 
                 {/* Recent readings skeleton */}
                 <div style={{
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.08)',
+                    background: 'var(--card-bg)',
+                    border: '1px solid var(--border-default)',
                     borderRadius: 16,
                     padding: 24,
                 }}>
@@ -99,8 +82,8 @@ export default function BibleTrackerLoading() {
                                 gap: 12,
                                 padding: 12,
                                 borderRadius: 12,
-                                background: 'rgba(255,255,255,0.02)',
-                                border: '1px solid rgba(255,255,255,0.04)',
+                                background: 'var(--card-bg-subtle)',
+                                border: '1px solid var(--card-bg)',
                             }}>
                                 <div className="skeleton" style={{ width: 38, height: 38, borderRadius: 10, flexShrink: 0 }} />
                                 <div style={{ flex: 1 }}>
