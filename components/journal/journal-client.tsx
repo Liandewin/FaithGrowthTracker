@@ -72,22 +72,18 @@ export default function JournalClient() {
     }
 
     return (
-        <div style={{
-            height: '100vh',
+        <div className="flex flex-col min-h-screen lg:h-screen" style={{
             background: 'var(--app-bg)',
             fontFamily: "'DM Sans', sans-serif",
             color: 'var(--app-text)',
-            display: 'flex',
-            flexDirection: 'column',
         }}>
             <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
                 .entry-item:hover { background: var(--card-bg-hover) !important; }
                 .entry-item.active { background: var(--gold-card-bg) !important; border-color: var(--gold-border-faint) !important; }
             `}</style>
 
             {/* Header */}
-            <div style={{ padding: '24px 32px', borderBottom: '1px solid var(--border-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--border-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                     <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, margin: 0, lineHeight: 1.1 }}>
                         My <span style={{ color: 'var(--app-gold)' }}>Journal</span>
@@ -109,10 +105,10 @@ export default function JournalClient() {
             </div>
 
             {/* Body */}
-            <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+            <div className="flex flex-col-reverse lg:flex-row lg:flex-1 lg:overflow-hidden">
 
                 {/* Left — Writing / Reading area */}
-                <div style={{ flex: 1, padding: 40, overflowY: 'auto', borderRight: '1px solid var(--border-subtle)' }}>
+                <div className="flex-1 overflow-y-auto border-t lg:border-t-0 lg:border-r" style={{ padding: '24px', borderColor: 'var(--border-subtle)' }}>
                     {isWriting ? (
                         <div style={{ maxWidth: 680 }}>
                             <input
@@ -220,7 +216,7 @@ export default function JournalClient() {
                 </div>
 
                 {/* Right — Entry list */}
-                <div style={{ width: 300, overflowY: 'auto', padding: 16 }}>
+                <div className="lg:w-[300px] overflow-y-auto" style={{ padding: 16 }}>
                     {loading ? (
                         <p style={{ color: 'var(--text-dim)', fontSize: 14, padding: 8 }}>Loading...</p>
                     ) : entries.length === 0 ? (

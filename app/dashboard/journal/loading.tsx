@@ -1,16 +1,13 @@
 export default function JournalLoading() {
     return (
-        <div style={{
-            height: '100vh',
+        <div className="flex flex-col min-h-screen lg:h-screen" style={{
             background: 'var(--app-bg)',
             fontFamily: "'DM Sans', sans-serif",
             color: 'var(--app-text)',
-            display: 'flex',
-            flexDirection: 'column',
         }}>
 
             {/* Header */}
-            <div style={{ padding: '24px 32px', borderBottom: '1px solid var(--border-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--border-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                     <div className="skeleton" style={{ height: 44, width: 220, marginBottom: 10 }} />
                     <div className="skeleton" style={{ height: 13, width: 70 }} />
@@ -19,10 +16,10 @@ export default function JournalLoading() {
             </div>
 
             {/* Body */}
-            <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+            <div className="flex flex-col-reverse lg:flex-row lg:flex-1 lg:overflow-hidden">
 
                 {/* Left — main reading/writing area */}
-                <div style={{ flex: 1, padding: 40, borderRight: '1px solid var(--border-subtle)' }}>
+                <div className="flex-1 border-t lg:border-t-0 lg:border-r" style={{ padding: 24, borderColor: 'var(--border-subtle)' }}>
                     <div className="skeleton" style={{ height: 44, width: '55%', marginBottom: 12 }} />
                     <div className="skeleton" style={{ height: 13, width: 100, marginBottom: 32 }} />
                     {[92, 85, 78, 88, 60, 72].map((w, i) => (
@@ -31,7 +28,7 @@ export default function JournalLoading() {
                 </div>
 
                 {/* Right — entry list */}
-                <div style={{ width: 300, overflowY: 'auto', padding: 16 }}>
+                <div className="lg:w-[300px] overflow-y-auto" style={{ padding: 16 }}>
                     {[...Array(5)].map((_, i) => (
                         <div key={i} style={{
                             padding: 14, borderRadius: 12, marginBottom: 8,

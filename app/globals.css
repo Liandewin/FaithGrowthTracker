@@ -236,6 +236,10 @@
   border-radius: 8px;
 }
 
+/* ─── Responsive page padding ───────────────────────────────── */
+.page-padding { padding: 16px; }
+@media (min-width: 768px) { .page-padding { padding: 32px; } }
+
 /* ─── Base resets ────────────────────────────────────────────── */
 @layer base {
   * {

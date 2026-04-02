@@ -65,7 +65,7 @@ export default function LogReadingForm({ onSave, onCancel }: Props) {
                 Log New Reading
             </h3>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 12, marginBottom: 12 }}>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
                 <div>
                     <label className="form-label">Book</label>
                     <select

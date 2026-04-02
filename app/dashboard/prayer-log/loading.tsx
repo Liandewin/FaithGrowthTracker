@@ -1,9 +1,9 @@
 export default function PrayerLogLoading() {
     return (
-        <div style={{
+        <div className="page-padding" style={{
             minHeight: '100vh',
             background: 'var(--app-bg)',
-            padding: '32px',
+
             fontFamily: "'DM Sans', sans-serif",
             color: 'var(--app-text)',
         }}>
@@ -18,7 +18,7 @@ export default function PrayerLogLoading() {
             </div>
 
             {/* 4 stats cards */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 24 }}>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                 {[...Array(4)].map((_, i) => (
                     <div key={i} style={{
                         background: i === 0 ? 'var(--gold-card-bg)' : 'var(--card-bg)',

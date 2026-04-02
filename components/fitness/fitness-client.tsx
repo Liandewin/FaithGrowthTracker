@@ -69,10 +69,10 @@ export default function FitnessClient() {
     }
 
     return (
-        <div style={{
+        <div className="page-padding" style={{
             minHeight: '100vh',
             background: 'var(--app-bg)',
-            padding: '32px',
+
             fontFamily: "'DM Sans', sans-serif",
             color: 'var(--app-text)',
         }}>
@@ -119,8 +119,8 @@ export default function FitnessClient() {
                         Log a Workout
                     </h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-                        <div style={{ display: 'flex', gap: 14 }}>
-                            <div style={{ flex: 2 }}>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <div className="sm:col-span-2">
                                 <label style={{ fontSize: 12, color: 'var(--app-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 6 }}>Workout Name *</label>
                                 <input
                                     type="text"
@@ -130,7 +130,7 @@ export default function FitnessClient() {
                                     style={{ width: '100%', padding: '10px 14px', borderRadius: 10, background: 'var(--card-bg-hover)', border: '1px solid var(--border-medium)', color: 'var(--app-text)', fontSize: 14, outline: 'none', boxSizing: 'border-box' }}
                                 />
                             </div>
-                            <div style={{ flex: 1 }}>
+                            <div>
                                 <label style={{ fontSize: 12, color: 'var(--app-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 6 }}>Type</label>
                                 <select
                                     value={form.type}
@@ -141,8 +141,8 @@ export default function FitnessClient() {
                                 </select>
                             </div>
                         </div>
-                        <div style={{ display: 'flex', gap: 14 }}>
-                            <div style={{ flex: 1 }}>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
                                 <label style={{ fontSize: 12, color: 'var(--app-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 6 }}>Duration (mins) *</label>
                                 <input
                                     type="number"
@@ -152,7 +152,7 @@ export default function FitnessClient() {
                                     style={{ width: '100%', padding: '10px 14px', borderRadius: 10, background: 'var(--card-bg-hover)', border: '1px solid var(--border-medium)', color: 'var(--app-text)', fontSize: 14, outline: 'none', boxSizing: 'border-box' }}
                                 />
                             </div>
-                            <div style={{ flex: 1 }}>
+                            <div>
                                 <label style={{ fontSize: 12, color: 'var(--app-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 6 }}>Date</label>
                                 <input
                                     type="date"

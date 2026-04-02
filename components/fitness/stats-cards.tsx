@@ -28,7 +28,7 @@ export default function FitnessStatsCards({ entries, loading }: Props) {
     ]
 
     return (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 24 }}>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             {cards.map((card, i) => (
                 <div key={i} style={{
                     background: card.gold ? 'var(--gold-card-bg)' : 'var(--card-bg)',

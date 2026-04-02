@@ -10,7 +10,7 @@ interface Props {
 
 export default function HomeClient({ firstName }: Props) {
     return (
-        <div className="min-h-screen bg-background text-foreground p-8 font-[family-name:var(--font-dm-sans)]">
+        <div className="min-h-screen bg-background text-foreground p-4 md:p-8 font-[family-name:var(--font-dm-sans)]">
             <div style={{ marginBottom: 32 }}>
                 <h1 style={{
                     fontFamily: "'Cormorant Garamond', serif",

@@ -7,7 +7,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <SidebarProvider>
             <AppSidebar />
             <main className="flex-1 w-full bg-background">
-                <div className="bg-background px-4 py-2 flex items-center justify-between">
+                <div className="sticky top-0 z-10 bg-background border-b border-border px-4 py-2 flex items-center justify-between">
                     <SidebarTrigger className="text-[var(--text-faint)] hover:text-[var(--app-gold)] hover:bg-[var(--gold-bg-subtle)] transition-all duration-200" />
                     <ThemeToggle />
                 </div>

@@ -122,7 +122,7 @@ export default function SummaryCards() {
     ]
 
     return (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {cards.map((card, i) => (
                 <Link key={i} href={card.href} style={{ textDecoration: 'none' }}>
                     <div style={{

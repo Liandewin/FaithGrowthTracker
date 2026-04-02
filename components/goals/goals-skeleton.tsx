@@ -1,7 +1,7 @@
 export default function GoalsSkeleton() {
     return (
         <>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {[
                     { bg: 'var(--column-todo-bg)', border: 'var(--column-todo-accent)', cards: 3 },
                     { bg: 'var(--gold-bg-subtle)', border: 'var(--app-gold)', cards: 2 },

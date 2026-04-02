@@ -1,9 +1,9 @@
 export default function BibleTrackerLoading() {
     return (
-        <div style={{
+        <div className="page-padding" style={{
             minHeight: '100vh',
             background: 'var(--app-bg)',
-            padding: '32px',
+
             fontFamily: "'DM Sans', sans-serif",
         }}>
 
@@ -17,7 +17,7 @@ export default function BibleTrackerLoading() {
             </div>
 
             {/* Stats cards skeleton */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 24 }}>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                 {[...Array(4)].map((_, i) => (
                     <div key={i} style={{
                         background: 'var(--card-bg)',
@@ -36,7 +36,7 @@ export default function BibleTrackerLoading() {
             </div>
 
             {/* Chart + Recent readings skeleton */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 16 }}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
                 {/* Chart skeleton */}
                 <div style={{
